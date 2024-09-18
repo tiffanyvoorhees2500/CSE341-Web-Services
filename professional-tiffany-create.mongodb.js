@@ -1,4 +1,11 @@
-[{
+// MongoDB Playground
+// Use Ctrl+Space inside a snippet or a string literal to trigger completions.
+
+// The current database to use.
+use('cse_341_week1');
+
+// Create a new document in the collection.
+db.getCollection('professional').insertOne({
     "professionalName": "Scott Voorhees",
     "nameLink": {
         "firstName": "Tiffany",
@@ -19,5 +26,4 @@
         "text": "GitHub"
     },
     "contactText": "Feel free to contact her at tiffster2500@gmail.com if you'd like for her to work for you!"
-}]
-
+});

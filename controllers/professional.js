@@ -1,23 +1,10 @@
-const fs = require("fs");
-const path = require("path");
+const mongodb = require('../db/connection');
 
-const filePath = path.join(__dirname, "../user.json");
-
-//Utility function to read JSON data from a file
-const readDataFromFile = () => {
-    const data = fs.readFileSync(filePath);
-    return JSON.parse(data);
+const getData = async (req, res, next) => {
+  const result = await mongodb.getDb().db("cse_341_week1").collection('professional').findOne();
+  
+    res.setHeader('Content-Type', 'application/json');
+    res.status(200).json(result);
 };
 
-const tiffanyRoute = (req, res) => {
-    try {
-        const professionals = readDataFromFile();
-        res.json(professionals[0]);
-    } catch (error) {
-        res.status(500).json({ message: 'Error reading data' });
-    }
-};
-
-module.exports = {
-    tiffanyRoute
-}
+module.exports = { getData };
