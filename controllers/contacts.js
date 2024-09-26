@@ -2,6 +2,7 @@ const mongodb = require('../db/connection');
 const ObjectId = require('mongodb').ObjectId;
 
 const getAll = async (req, res) => {
+  //#swagger.tags=['Contacts']
   try {
     const result = await mongodb.getDb().db().collection('contacts').find();
     const contacts = await result.toArray();
@@ -14,6 +15,7 @@ const getAll = async (req, res) => {
 };
 
 const getSingle = async (req, res) => {
+  //#swagger.tags=['Contacts']
   try {
     const contact = await mongodb
       .getDb()
@@ -28,6 +30,7 @@ const getSingle = async (req, res) => {
 };
 
 const createContact = async (req, res) => {
+  //#swagger.tags=['Contacts']
   //Create a contact
   const contact = {
     firstName: req.body.firstName,
@@ -47,6 +50,7 @@ const createContact = async (req, res) => {
 
 // Update a Temple by the id in the request
 const updateContact = async (req, res) => {
+  //#swagger.tags=['Contacts']
   const id = req.params.id;
 
   //Create a contact
@@ -65,18 +69,19 @@ const updateContact = async (req, res) => {
       .collection('contacts')
       .replaceOne({ _id: ObjectId.createFromHexString(id) }, contact);
 
-    if(result.matchedCount === 0){
-      return res.status(404).json({ error: "Contact not found" });
+    if (result.matchedCount === 0) {
+      return res.status(404).json({ error: 'Contact not found' });
     }
 
     res.status(204).send();
   } catch (error) {
-    console.log("Here");
+    console.log('Here');
     res.status(500).json({ error: error.message });
   }
 };
 
 const deleteContact = async (req, res) => {
+  //#swagger.tags=['Contacts']
   const id = req.params.id;
 
   try {
