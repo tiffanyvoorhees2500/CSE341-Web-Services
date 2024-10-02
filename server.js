@@ -5,7 +5,7 @@ const app = express();
 const port = process.env.PORT || 8080;
 
 app
-  .use(express.json())
+  .use(express.json()) //used for parsing JSON
   .use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader(
